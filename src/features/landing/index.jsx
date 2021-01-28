@@ -1,10 +1,13 @@
 import React from "react";
-import Head from "./Head";
+import Header from "./header";
+import Event from "./event";
+import Footer from "./footer";
+
 
 function Landing(props) {
   return (
     <div className="m-0 p-0">
-      <Head></Head>
+      <Header></Header>
       <div className="bg-gray-50 mt-10">
         <div className="flex flex-col lg:flex-row container mx-auto p-5 lg:p-10">
           <div className="flex-1 text-center lg:border-r-2  border-gray-400 p-5 pb-10">
@@ -77,6 +80,8 @@ function Landing(props) {
           </div>
         </div>
       </div>
+      <Event></Event>
+      <Footer></Footer>
     </div>
   );
 }

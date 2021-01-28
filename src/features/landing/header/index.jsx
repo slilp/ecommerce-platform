@@ -1,6 +1,6 @@
 import React from "react";
 
-function Head() {
+function Header() {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col-reverse lg:flex-row justify-between items-center">
@@ -34,4 +34,4 @@ function Head() {
   );
 }
 
-export default Head;
+export default Header;

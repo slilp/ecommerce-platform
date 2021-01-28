@@ -5,6 +5,7 @@ import React, {
 const Login = lazy(() => import('../../features/login'));
 const Register = lazy(() => import('../../features/register'));
 const Main = lazy(() => import('../../features/landing'));
+const Marketplace = lazy(()=> import('../../features/marketplace'));
   
   const routes = {
     login: {
@@ -24,6 +25,12 @@ const Main = lazy(() => import('../../features/landing'));
       exact: '/',
       name: 'Main',
       component: Main
+    },
+    marketplace: {
+      path: '/marketplace',
+      exact: '/marketplace',
+      name: 'Marketplace',
+      component: Marketplace
     }
   };
   
@@ -32,7 +39,8 @@ const Main = lazy(() => import('../../features/landing'));
     routes:[
       routes.login,
       routes.register,
-      routes.main
+      routes.main,
+      routes.marketplace
     ],
     redirect:{
       ...routes.login

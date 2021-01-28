@@ -3,7 +3,7 @@ import React from "react";
 function NavBar(props) {
   return (
     <>
-      <div className="lg:fixed bg-white pt-4 lg:p-4 lg:shadow w-full">
+      <div className="lg:fixed bg-white pt-4 lg:p-4 lg:shadow w-full z-50">
         <div className="container mx-auto pl-3 pr-3 ">
           <div className="hidden  lg:flex flex-wrap justify-between items-center ">
             <div className="flex space-x-5 align-middle">
@@ -50,7 +50,7 @@ function NavBar(props) {
 
 function NavBarMobile() {
   return (
-    <div className="sticky top-0 bg-white p-3 shadow w-full lg:hidden">
+    <div className="sticky top-0 bg-white p-3 shadow w-full lg:hidden z-50">
       <div className="container mx-auto pl-3 pr-3 ">
         <div className="flex  flex-wrap justify-between items-center ">
           <div className="flex space-x-5 align-middle">
