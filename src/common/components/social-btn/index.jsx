@@ -4,7 +4,6 @@ import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons";
-import axios from "axios";
 
 const SocialBtnSpan = styled.a`
   font-size: 1rem;
