@@ -30,7 +30,7 @@ function MarketPlace() {
         <p className="text-lg m-2 ">
           คำที่ค้นหา : <span className="text-yellow-600">จุฬา</span>{" "}
         </p>
-        <div className="grid lg:grid-cols-4 grid-cols-2">
+        <div className="grid lg:grid-cols-4 grid-cols-1 justify-items-center">
           <MarketPlaceItem></MarketPlaceItem>
           <MarketPlaceItem></MarketPlaceItem>
           <MarketPlaceItem></MarketPlaceItem>
