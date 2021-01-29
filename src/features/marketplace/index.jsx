@@ -1,5 +1,5 @@
 import React from "react";
-import MarketPlaceItem from "./item";
+import StoreItem from "./store";
 import { Input } from "antd";
 const { Search } = Input;
 
@@ -31,14 +31,14 @@ function MarketPlace() {
           คำที่ค้นหา : <span className="text-yellow-600">จุฬา</span>{" "}
         </p>
         <div className="grid lg:grid-cols-4 grid-cols-1 justify-items-center">
-          <MarketPlaceItem></MarketPlaceItem>
-          <MarketPlaceItem></MarketPlaceItem>
-          <MarketPlaceItem></MarketPlaceItem>
-          <MarketPlaceItem></MarketPlaceItem>
-          <MarketPlaceItem></MarketPlaceItem>
-          <MarketPlaceItem></MarketPlaceItem>
-          <MarketPlaceItem></MarketPlaceItem>
-          <MarketPlaceItem></MarketPlaceItem>
+          <StoreItem></StoreItem>
+          <StoreItem></StoreItem>
+          <StoreItem></StoreItem>
+          <StoreItem></StoreItem>
+          <StoreItem></StoreItem>
+          <StoreItem></StoreItem>
+          <StoreItem></StoreItem>
+          <StoreItem></StoreItem>
         </div>
       </div>
     </div>

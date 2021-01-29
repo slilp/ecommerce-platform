@@ -6,6 +6,7 @@ const Login = lazy(() => import('../../features/login'));
 const Register = lazy(() => import('../../features/register'));
 const Main = lazy(() => import('../../features/landing'));
 const Marketplace = lazy(()=> import('../../features/marketplace'));
+const Store = lazy(()=> import('../../features/store'));
   
   const routes = {
     login: {
@@ -31,6 +32,12 @@ const Marketplace = lazy(()=> import('../../features/marketplace'));
       exact: '/marketplace',
       name: 'Marketplace',
       component: Marketplace
+    },
+    store: {
+      path: '/store',
+      exact: '/store',
+      name: 'Store',
+      component: Store
     }
   };
   
@@ -40,7 +47,8 @@ const Marketplace = lazy(()=> import('../../features/marketplace'));
       routes.login,
       routes.register,
       routes.main,
-      routes.marketplace
+      routes.marketplace,
+      routes.store
     ],
     redirect:{
       ...routes.login
