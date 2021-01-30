@@ -8,6 +8,7 @@ const Main = lazy(() => import('../../features/landing'));
 const Marketplace = lazy(()=> import('../../features/marketplace'));
 const Store = lazy(()=> import('../../features/store'));
 const Product = lazy(()=> import('../../features/product'));
+const Cart = lazy(()=> import('../../features/cart'));
   
   const routes = {
     login: {
@@ -45,6 +46,12 @@ const Product = lazy(()=> import('../../features/product'));
       exact: '/p',
       name: 'Product',
       component: Product
+    },
+    cart:{
+      path: '/cart',
+      exact: '/cart',
+      name: 'Cart',
+      component: Cart
     }
   };
   
@@ -56,7 +63,8 @@ const Product = lazy(()=> import('../../features/product'));
       routes.main,
       routes.marketplace,
       routes.store,
-      routes.product
+      routes.product,
+      routes.cart
     ],
     redirect:{
       ...routes.login

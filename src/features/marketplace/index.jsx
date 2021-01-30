@@ -9,12 +9,10 @@ function MarketPlace() {
   return (
     <div>
       <div className="bg-gray-100 p-10 text-center">
-        <div className="flex justify-center mb-2">
           <img
-            className="w-20"
+            className="w-20 mx-auto mb-2"
             src="https://www.flaticon.com/svg/vstatic/svg/2230/2230606.svg?token=exp=1611865293~hmac=a49eadaf9d958e42550d6b45f482a241"
           ></img>
-        </div>
 
         <h1 className="text-2xl text-black">ค้นหา marketplace อะไรดี ?</h1>
         <Search
