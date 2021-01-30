@@ -8,8 +8,8 @@ function Layout(props) {
     <div>
       <NavBar></NavBar>
       <div className="hidden  lg:block pt-8">
-          <br></br>
-          <br></br>
+        <br></br>
+        <br></br>
       </div>
       <Content></Content>
       <Footer></Footer>
