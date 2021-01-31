@@ -9,7 +9,9 @@ const Marketplace = lazy(()=> import('../../features/marketplace'));
 const Store = lazy(()=> import('../../features/store'));
 const Product = lazy(()=> import('../../features/product'));
 const Cart = lazy(()=> import('../../features/cart'));
-  
+const Address = lazy(()=> import('../../features/address'));
+const Checkout = lazy(()=> import('../../features/checkout'));
+
   const routes = {
     login: {
       path: '/login',
@@ -52,6 +54,18 @@ const Cart = lazy(()=> import('../../features/cart'));
       exact: '/cart',
       name: 'Cart',
       component: Cart
+    },
+    address:{
+      path: '/address',
+      exact: '/address',
+      name: 'Address',
+      component: Address
+    },
+    checkout:{
+      path: '/checkout',
+      exact: '/checkout',
+      name: 'Checkout',
+      component: Checkout
     }
   };
   
@@ -64,7 +78,9 @@ const Cart = lazy(()=> import('../../features/cart'));
       routes.marketplace,
       routes.store,
       routes.product,
-      routes.cart
+      routes.cart,
+      routes.address,
+      routes.checkout
     ],
     redirect:{
       ...routes.login
