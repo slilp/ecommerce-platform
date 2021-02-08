@@ -5,7 +5,7 @@ import Footer from "./footer";
 
 function Layout(props) {
   return (
-    <div>
+    <div className="bg-style">
       <NavBar></NavBar>
       <div className="hidden  lg:block pt-8">
         <br></br>
