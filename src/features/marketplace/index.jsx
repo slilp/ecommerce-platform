@@ -1,22 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import StoreItem from "./store";
 import { Input } from "antd";
+import shop from "../../common/icon/shop.svg";
 const { Search } = Input;
 
 function MarketPlace() {
-  const onSearch = (value) => console.log(value);
+  const [search, setSearch] = useState("");
+
+  const onSearch = (value) => {
+    setSearch(value.trim());
+  };
+
+  const stores = [
+    {
+      id:1,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+    {
+      id:2,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+    {
+      id:3,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+    {
+      id:4,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+    {
+      id:5,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+    {
+      id:6,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+    {
+      id:7,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+    {
+      id:8,
+      title: "เกษตรศาสตร์มาเก็ตเพลส",
+      desc: "รวบรวมสินค้า",
+      image:
+        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
+    },
+  ];
 
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="bg-gray-100 p-10 text-center">
-          <img
-            className="w-20 mx-auto mb-2"
-            src="https://www.flaticon.com/svg/vstatic/svg/2230/2230606.svg?token=exp=1611865293~hmac=a49eadaf9d958e42550d6b45f482a241"
-          ></img>
+        <img className="w-20 mx-auto mb-2" src={shop}></img>
 
         <h1 className="text-2xl text-black">ค้นหา marketplace อะไรดี ?</h1>
         <Search
-          placeholder="จุฬามาเก็เพลส"
+          placeholder="จุฬามาเก็ตเพลส"
           onSearch={onSearch}
           size="large"
           loading={false}
@@ -24,19 +85,20 @@ function MarketPlace() {
         />
       </div>
       <div className="container mx-auto p-5  lg:w-2/3">
-        <p className="text-2xl m-2 ">Marketplace เเนะนำ </p>
+        <p className="text-2xl m-2 ">Marketplace ทั้งหมด</p>
         <p className="text-lg m-2 ">
-          คำที่ค้นหา : <span className="text-yellow-600">จุฬา</span>{" "}
+          คำที่ค้นหา : <span className="text-yellow-600">{search}</span>
         </p>
         <div className="grid lg:grid-cols-4 grid-cols-1 justify-items-center">
-          <StoreItem></StoreItem>
-          <StoreItem></StoreItem>
-          <StoreItem></StoreItem>
-          <StoreItem></StoreItem>
-          <StoreItem></StoreItem>
-          <StoreItem></StoreItem>
-          <StoreItem></StoreItem>
-          <StoreItem></StoreItem>
+          {stores.map((item) => (
+            <StoreItem
+            key={item.id}
+            title={item.title}
+            image={item.image}
+            desc={item.desc}
+            id={item.id}
+            ></StoreItem>
+          ))}
         </div>
       </div>
     </div>

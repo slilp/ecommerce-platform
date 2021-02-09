@@ -21,7 +21,7 @@ function Landing(props) {
     },
     {
       title: "คนซื้อ = คนขาย",
-      content:"คุณไม่เพียงสามารถซื้อสินค้า เเต่ยังสามารถเป็นผู้ขายสินค้าเองได้ด้วย เป็นช่องทางสร้างรายได้ให้กับคุณ",
+      content:"คุณไม่เพียงสามารถซื้อสินค้า เเต่ยังสามารถเป็นผู้ขายสินค้าเองได้ด้วย",
       icon:moneyIcon
     },
   ];
@@ -67,7 +67,7 @@ function SubSection(props) {
       <img src={props.icon} className="w-16"></img>
       <div>
         <h1 className="text-xl text-indigo-400 mb-0">{props.title}</h1>
-        <span>{props.content}</span>
+        <span className="text-lg" >{props.content}</span>
       </div>
     </div>
   );
