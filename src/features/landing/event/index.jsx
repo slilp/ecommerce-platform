@@ -65,7 +65,7 @@ function Event() {
               .map((item) => (
                 <Link to={item.url}>
                   <img
-                    className="w-full h-96 cursor-pointer hover:opacity-75"
+                    className="w-full h-full  cursor-pointer hover:opacity-75"
                     src={item.image}
                   ></img>
                 </Link>

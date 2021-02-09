@@ -89,7 +89,7 @@ function MarketPlace() {
         <p className="text-lg m-2 ">
           คำที่ค้นหา : <span className="text-yellow-600">{search}</span>
         </p>
-        <div className="grid lg:grid-cols-4 grid-cols-1 justify-items-center">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 justify-items-center">
           {stores.map((item) => (
             <StoreItem
             key={item.id}
