@@ -1,13 +1,14 @@
 import React from "react";
 
-function PaymentChannel() {
+function PaymentChannel(props) {
   return (
-    <div className="flex relative flex-col justify-center items-center shadow-xl  cursor-pointer  border-blue-400 border-2 m-2 p-2">
+    <div className="flex relative flex-col justify-center items-center hover:shadow-xl cursor-pointer m-2 p-2">
+      <br></br>
       <img
         className="w-1/3"
-        src="https://www.advancedbizmagazine.com/wp-content/uploads/2018/10/Logo-new-K-PLUS-927x1024.jpg"
+        src={props.icon}
       ></img>
-      <p className="">Credit/Debit</p>
+      <p className="m-2 text-lg">{props.name}</p>
     </div>
   );
 }

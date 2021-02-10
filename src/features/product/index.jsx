@@ -44,7 +44,7 @@ function Product() {
         <div className="lg:border-l-2  border-fuchsia-600 lg:mt-16 lg:mb-16 lg:ml-0 lg:mr-10"></div>
         <div className="flex-1 p-3">
           <div className="rounded p-5 break-words">
-            <p className="text-xl">{productInfo.name}</p>
+            <p className="text-4xl">{productInfo.name}</p>
             <p className="text-lg bg-gray-100 p-5 md:w-1/3 text-center text-yellow-700">
               {productInfo.price} บาท
             </p>
