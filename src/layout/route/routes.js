@@ -88,25 +88,31 @@ const BuyHistory = lazy(()=> import('../../features/history'));
       routes.cart,
       routes.address,
       routes.checkout,
-      routes.history
+      // routes.history
     ],
     redirect:{
       ...routes.login
     }
   } ;
   
-  // const member = {
-  //   routes:[
-  //     routes.dashboard,
-  //     routes.main
-  //   ],
-  //   redirect:{
-  //     ...routes.dashboard 
-  //   }
-  // } 
+  const member = {
+    routes:[
+      routes.main,
+      routes.marketplace,
+      routes.store,
+      routes.product,
+      routes.cart,
+      routes.address,
+      routes.checkout,
+      routes.history
+    ],
+    redirect:{
+      ...routes.main 
+    }
+  } 
   
   
   export default {
-    guest
-    // member
+    guest,
+    member
   };

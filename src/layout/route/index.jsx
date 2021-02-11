@@ -1,9 +1,14 @@
-import React from "react";
+import React , { useState } from "react";
 import routes from "./routes";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { getAccessToken } from "../../storage/token";
 
 function PrivateRoute(props) {
+
+  const [login,setLogin] = useState(getAccessToken());
+
   let routeList = routes.guest;
+  if(login) routeList = routes.member ;
 
   return (
     <Switch>

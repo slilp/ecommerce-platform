@@ -1,15 +1,41 @@
 import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, message } from "antd";
+import "./style.scss";
 import SocialButton from "../../common/components/social-btn";
+import { postJson } from "../../axios";
+import { useHistory } from "react-router-dom";
+
 
 
 function Register(props) {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
+  const [form] = Form.useForm();
+  const history = useHistory();
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const onFinish = async (values) => {
+
+    const res = await postJson("/customer/register", {
+      username: values.username,
+      password: values.password,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.username,
+      registerDate: Date.now()
+    });
+
+    if (res.status == 200) {
+      //set login info
+      message.success("สมัครสมาชิกสำเร็จ", 5);
+      history.push("/login");
+    } else {
+
+      if(res.data.statusCode == "ECOM-409"){
+        message.error("มีบัญชีนี้ในระบบเเล้ว", 3);
+      }else{
+        message.error("เกิดข้อผิดพลาดกรุณาลองดูใหม่", 3);
+      }
+      // form.resetFields();
+    }
+
   };
 
   return (
@@ -29,25 +55,24 @@ function Register(props) {
               ></SocialButton>
             </Form.Item>
 
-            <Form.Item>หรือ</Form.Item>
-
+            <p className="text-lg">หรือ</p>
 
             <Form
               name="basic"
               initialValues={{
                 remember: true,
               }}
-               layout="vertical"
+              layout="vertical"
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
+              form={form}
             >
               <Form.Item
-                label="Username"
+                label="อีเมลล์"
                 name="username"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your username!",
+                    message: "กรุณากรอกอีเมลล์",
                   },
                 ]}
               >
@@ -60,7 +85,7 @@ function Register(props) {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your username!",
+                    message: "กรุณากรอกชื่อ",
                   },
                 ]}
               >
@@ -73,7 +98,7 @@ function Register(props) {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your username!",
+                    message: "กรุณากรอกนามสกุล",
                   },
                 ]}
               >
@@ -81,31 +106,42 @@ function Register(props) {
               </Form.Item>
 
               <Form.Item
-                label="Password"
                 name="password"
+                label="รหัสผ่าน"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your password!",
+                    message: "กรุณากรอกรหัสผ่าน",
                   },
                 ]}
+                hasFeedback
               >
                 <Input.Password />
               </Form.Item>
 
               <Form.Item
-                label="Confirm Password"
-                name="confirmPassword"
+                name="confirm"
+                label="ยืนยันรหัสผ่าน"
+                dependencies={["password"]}
+                hasFeedback
                 rules={[
                   {
                     required: true,
-                    message: "Please input your password!",
+                    message: "กรุณากรอกรหัสผ่าน",
                   },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject("รหัสผ่านไม่ตรงกัน");
+                    },
+                  }),
                 ]}
               >
                 <Input.Password />
               </Form.Item>
-
+              <br></br>
               <Form.Item>
                 <Button type="primary" htmlType="submit">
                   สมัครสมาชิก
@@ -114,13 +150,6 @@ function Register(props) {
             </Form>
           </div>
         </div>
-      </div>
-      <br />
-      <div className="bg-gradient-to-b from-white to-blue-200  mt-10 text-center p-10">
-        <h1 className="text-3xl text-indigo-900">ให้ edverest ช่วยคุณ</h1>
-        <h1 className="text-2xl text-indigo-900">
-          เพื่อเจอทุนที่เราแนะนำสำหรับคุณ พร้อมระบบติดตามและสมัครทุนในอนาคต !
-        </h1>
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ function Seller() {
     name: "นาย สลิล พ่วงพุ่ม",
     profileImg:
       "https://www.denofgeek.com/wp-content/uploads/2019/02/mcu-1-iron-man.jpg?resize=768%2C432",
-    line: "",
-    facebook: "",
-    tel: "0875006783",
+    line: "https://www.w3schools.com",
+    facebook: "https://www.w3schools.com",
+    tel: "tel:+0875006783",
   };
 
   return (
@@ -23,19 +23,19 @@ function Seller() {
 
       <p className="text-lg">การติดต่อ</p>
       <div className="flex items-center  space-x-4">
-        <a href="https://www.w3schools.com" target="_blank">
+        <a href={sellerInfo.line} target="_blank">
           <img
             src="https://image.flaticon.com/icons/png/128/2111/2111498.png"
             className="h-10 w-10 cursor-pointer hover:opacity-80"
           ></img>
         </a>
-        <a href="https://www.w3schools.com" target="_blank">
+        <a href={sellerInfo.facebook} target="_blank">
           <img
             src="https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512"
             className="h-10 w-10 cursor-pointer hover:opacity-80"
           ></img>
         </a>
-        <a href="tel:+0875006783">
+        <a href={sellerInfo.tel}>
           <img
             src="https://icon-library.com/images/phone-icon-circle/phone-icon-circle-12.jpg"
             className="h-10 w-10 cursor-pointer hover:opacity-80"

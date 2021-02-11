@@ -1,5 +1,6 @@
 import React from "react";
 import AddAddress from "./add";
+import Bill from "../bill";
 
 function Address() {
   return (
@@ -60,38 +61,10 @@ function Address() {
           </div>
         </div>
         <div className="lg:w-1/3 md:w-1/2 px-2">
-          <div className="border-2 border-gray-400  mx-auto p-5">
-            <h1 className="text-xl border-b-2 border-red-500 p-2 text-center">
-              สรุปรายการ
-            </h1>
-            <br></br>
-            <p>
-              <span className="text-md">
-                <i className="fas fa-cart-arrow-down pr-2"></i> ราคาสินค้ารวม
-              </span>
-              <span className="text-md float-right">300 บาท</span>
-            </p>
-            <hr></hr>
-            <br></br>
-            <p>
-              <span className="text-md">
-                <i className="fas fa-truck pr-2"></i>ค่าขนส่ง
-              </span>
-              <span className="text-md float-right">จัดส่งฟรี</span>
-            </p>
-            <hr></hr>
-            <br></br>
-            <p>
-              <span className="text-lg font-bold">รวม</span>
-              <span className="text-lg float-right">300 บาท</span>
-            </p>
-            <br></br>
-            <button className="text-white text-lg bg-green-400 hover:bg-green-600 border-0 focus:border-0 cursor-pointer  py-2 w-full rounded">
-              <i className="fas fa-arrow-right mr-2"></i>
-              ต่อไป
-              {/* <i className="fas fa-money-bill mr-2"></i> */}
-            </button>
-          </div>
+          <Bill
+          step="address"
+          next="/checkout"
+          ></Bill>
         </div>
       </div>
     </div>

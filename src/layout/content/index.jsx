@@ -4,7 +4,7 @@ const loading = <h1></h1>;
 
 function Content(props) {
   return (
-      <section>
+      <section className="min-h-screen">
         <Suspense fallback={loading}>
             <PrivateRoute></PrivateRoute>
         </Suspense>
