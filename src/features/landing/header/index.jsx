@@ -1,6 +1,6 @@
 import React from "react";
 import landingBg from "../../../common/img/landing-main-top.jpg";
-
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -16,16 +16,12 @@ function Header() {
             <h1 className="lg:text-2xl text-xl">
               ค้นหา Market เเล้วไปช๊อปกันเลย !
             </h1>
-            <div className="mb-4">
-              <input
-                maxLength="25"
-                className="text-lg border py-2 px-3 text-grey-darkest border-gray-500"
-              ></input>
-            </div>
-            <button className="text-white text-lg bg-pink-500 hover:bg-pink-400 shadow-md focus:outline-none p-2 rounded">
-              <i className="fas fa-shopping-bag mr-2"></i>
-              ค้นหา Market
-            </button>
+            <Link to="/marketplace">
+              <button className="text-white text-lg bg-pink-500 hover:bg-pink-400 shadow-md focus:outline-none p-2 rounded">
+                <i className="fas fa-shopping-bag mr-2"></i>
+                ค้นหา Marketplace
+              </button>
+            </Link>
           </div>
         </div>
         <div className="flex flex-1 justify-center">

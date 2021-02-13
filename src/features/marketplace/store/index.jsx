@@ -6,10 +6,10 @@ const { Meta } = Card;
 function StoreItem(props) {
   return (
     <div className="m-1">
-      <Link to="/store">
+      <Link to={`/store/${props.id}`}>
         <Card
           hoverable
-          style={{ width: "100%" }}
+          style={{ width: "100%" ,height:"100%"}}
           cover={<img src={props.image} />}
         >
           <Meta title={props.title} description={props.desc} />

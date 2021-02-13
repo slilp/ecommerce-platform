@@ -39,8 +39,8 @@ const BuyHistory = lazy(()=> import('../../features/history'));
       component: Marketplace
     },
     store: {
-      path: '/store',
-      exact: '/store',
+      path: '/store/:id',
+      exact: '/store/:id',
       name: 'Store',
       component: Store
     },

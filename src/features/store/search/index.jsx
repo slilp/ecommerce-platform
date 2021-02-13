@@ -1,46 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "../../productItem";
 import { Link } from "react-router-dom";
+import { getParam } from "../../../axios";
 import { Input } from "antd";
 const { Search } = Input;
 
-function SearchProduct() {
+function SearchProduct(props) {
+
   const [search, setSearch] = useState("");
+  const [listProduct, setListProduct] = useState([]);
+
+  useEffect(async () => {
+    
+    console.log(props.marketplaceId);
+
+    const res = await getParam(`/product/search/${props.marketplaceId}/0/10`, {
+      s: search,
+    });
+
+    if (res.status == 200) {
+      setListProduct([...res.data.data.listData]);
+    } else {
+      setListProduct([]);
+    }
+  }, [search]);
 
   const onSearch = (value) => {
     setSearch(value.trim());
   };
 
-  const items = [
-    {
-      name: "Iphone",
-      image:
-        "https://public-assets.skooldio.com/course-images%2F10391b9d-d19e-4107-ad82-cc686af37f7e%2FData%2520Storytelling%2520with%2520Infographics.jpg",
-      desc: "Lorem ipsum dolor sit amet consectetur",
-      price: 500.0,
-    },
-    {
-      name: "Iphone",
-      image:
-        "https://public-assets.skooldio.com/course-images%2F10391b9d-d19e-4107-ad82-cc686af37f7e%2FData%2520Storytelling%2520with%2520Infographics.jpg",
-      desc: "Lorem ipsum dolor sit amet consectetur",
-      price: 500.0,
-    },
-    {
-      name: "Iphone",
-      image:
-        "https://public-assets.skooldio.com/course-images%2F10391b9d-d19e-4107-ad82-cc686af37f7e%2FData%2520Storytelling%2520with%2520Infographics.jpg",
-      desc: "Lorem ipsum dolor sit amet consectetur",
-      price: 500.0,
-    },
-    {
-      name: "Iphone",
-      image:
-        "https://public-assets.skooldio.com/course-images%2F10391b9d-d19e-4107-ad82-cc686af37f7e%2FData%2520Storytelling%2520with%2520Infographics.jpg",
-      desc: "Lorem ipsum dolor sit amet consectetur",
-      price: 500.0,
-    },
-  ];
+  const searchChange = (e) => {
+    if (e.target.value.trim().length == 0) {
+      setSearch("");
+    }
+  };
 
   return (
     <>
@@ -51,6 +44,7 @@ function SearchProduct() {
           <Search
             placeholder="ค้นหาสินค้า"
             onSearch={onSearch}
+            onChange={searchChange}
             size="large"
             loading={false}
             style={{ width: 300 }}
@@ -62,13 +56,18 @@ function SearchProduct() {
         คำที่ค้นหา : <span className="text-yellow-600">{search}</span>
       </p>
       <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 justify-items-center">
-        {items.map((item) => (
+        {listProduct.map((item) => (
           <Link to="/p">
             <ProductItem
-              name={item.name}
-              image={item.image}
-              desc={item.desc}
-              price={item.price}
+              key={item.productId}
+              id={item.productId}
+              name={item.productName}
+              image={item.imagePath}
+              // desc={item.desc}
+              displayPrice={item.displayPrice}
+              netPrice={item.netPrice}
+              promotionCode1={item.promotionCode1}
+              promotionCode2={item.promotionCode2}
             ></ProductItem>
           </Link>
         ))}

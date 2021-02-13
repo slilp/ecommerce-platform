@@ -1,35 +1,41 @@
-import React from "react";
-import SuggestItem from "./suggest";
+import React, { useEffect, useState } from "react";
+// import SuggestItem from "./suggest";
 import SearchProduct from "./search";
+import { getParam } from "../../axios";
 
+function Store(props) {
+  const [search, setSearch] = useState({});
+  const [market, setMarket] = useState({
+    marketplaceId : props.match.params.id
+  });
 
-function Store() {
+  useEffect(async () => {
+    const res = await getParam(
+      "/marketplace/info/" + props.match.params.id,
+      {}
+    );
 
-  const storeInfo = {
-    name: "งานหนังสือเเห่งชาติ",
-    desc:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi minus doloremque similique harum! Eligendi veniam corporis dolore ipsam? Atque, nesciunt! Asperiores ab explicabo ratione cupiditate! Quisquam pariatur suscipit voluptatem corporis?",
-    image:
-      "https://thestandard.co/wp-content/uploads/2020/03/TSD-UPDATE-20202-2-3.jpg",
-  };
+    if (res.status == 200) {
+      setMarket(res.data.data);
+    }
+  }, []);
 
-  return (
+  http: return (
     <div>
       <div className="container mx-auto lg:p-5  lg:w-2/3">
-        <img className="lg:h-90 w-full" src={storeInfo.image}></img>
+        <img className="lg:h-90 w-full" src={market.backgroundImagePath}></img>
 
         <div className="flex justify-center lg:flex-row flex-col items-center p-5">
           <div className="p-5 lg:flex-1">
             <h1 className="text-3xl px-5 border-l-4 border-pink-500">
-              {storeInfo.name}
+              {market.marketName}
             </h1>
-            <p className="text-lg">{storeInfo.desc}</p>
+            <p className="text-lg">{market.description}</p>
           </div>
         </div>
-
-        <SuggestItem></SuggestItem>
-        <br></br>
-        <SearchProduct></SearchProduct>
+        {/* <SuggestItem marketplaceId={market.marketplaceId}></SuggestItem>
+        <br></br> */}
+        <SearchProduct key={market.marketplaceId} marketplaceId={market.marketplaceId}></SearchProduct>
         <br></br>
       </div>
     </div>

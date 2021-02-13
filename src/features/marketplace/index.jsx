@@ -1,74 +1,41 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import StoreItem from "./store";
 import { Input } from "antd";
 import shop from "../../common/icon/shop.svg";
+import {getParam} from "../../axios";
 const { Search } = Input;
 
 function MarketPlace() {
+
   const [search, setSearch] = useState("");
+  const [market,setMarket] = useState([]);
+  const [totalRecord,setTotalRecord] = useState(0);
+
+
+  useEffect(async () => {
+
+    const res = await getParam("/marketplace/search/0/10", {
+      name : search
+    });
+
+    if (res.status == 200) {
+      setMarket([...res.data.data.listData]);
+    }else{
+      setMarket([]);
+    }
+
+  }, [search])
+
 
   const onSearch = (value) => {
     setSearch(value.trim());
   };
 
-  const stores = [
-    {
-      id:1,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-    {
-      id:2,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-    {
-      id:3,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-    {
-      id:4,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-    {
-      id:5,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-    {
-      id:6,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-    {
-      id:7,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-    {
-      id:8,
-      title: "เกษตรศาสตร์มาเก็ตเพลส",
-      desc: "รวบรวมสินค้า",
-      image:
-        "https://assets.skooldio.com/courses/design-thinking-01/design-thinking-cover-2021-2.png",
-    },
-  ];
+  const searchChange = (e) =>{
+      if(e.target.value.trim().length == 0){
+        setSearch("");
+      }
+  }
 
   return (
     <div className="min-h-screen">
@@ -79,24 +46,25 @@ function MarketPlace() {
         <Search
           placeholder="จุฬามาเก็ตเพลส"
           onSearch={onSearch}
+          onChange={searchChange}
           size="large"
           loading={false}
           style={{ width: 300 }}
         />
       </div>
-      <div className="container mx-auto p-5  lg:w-2/3">
+      <div className="container mx-auto p-5">
         <p className="text-2xl m-2 ">Marketplace ทั้งหมด</p>
         <p className="text-lg m-2 ">
           คำที่ค้นหา : <span className="text-yellow-600">{search}</span>
         </p>
         <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 justify-items-center">
-          {stores.map((item) => (
+          {market.map((item) => (
             <StoreItem
-            key={item.id}
-            title={item.title}
-            image={item.image}
-            desc={item.desc}
-            id={item.id}
+            key={item.marketplaceId}
+            title={item.marketName}
+            image={item.profileImagePath}
+            desc={item.preDescription}
+            id={item.marketplaceId}
             ></StoreItem>
           ))}
         </div>
