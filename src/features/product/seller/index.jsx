@@ -1,24 +1,20 @@
 import React from "react";
 
-function Seller() {
-  const sellerInfo = {
-    name: "นาย สลิล พ่วงพุ่ม",
-    profileImg:
-      "https://www.denofgeek.com/wp-content/uploads/2019/02/mcu-1-iron-man.jpg?resize=768%2C432",
-    line: "https://www.w3schools.com",
-    facebook: "https://www.w3schools.com",
-    tel: "tel:+0875006783",
-  };
+function Seller({ sellerInfo }) {
+
 
   return (
     <div className="rounded p-5 break-words">
       <p className="text-xl">ผู้ขาย</p>
       <p className="text-lg bg-gray-100 p-5 md:w-1/2 text-center text-yellow-700">
         <img
-          src={sellerInfo.profileImg}
+          src={
+            sellerInfo.profileImagePath ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDYLLQm52fRCLlUXdlb4_C728SDu_2qobCKw&usqp=CAU"
+          }
           className="h-20 w-20 rounded-full cursor-pointer hover:opacity-80"
         ></img>
-        {sellerInfo.name}
+        {sellerInfo.firstName} {sellerInfo.lastName}
       </p>
 
       <p className="text-lg">การติดต่อ</p>
@@ -35,13 +31,13 @@ function Seller() {
             className="h-10 w-10 cursor-pointer hover:opacity-80"
           ></img>
         </a>
-        <a href={sellerInfo.tel}>
+        <a href={sellerInfo.mobile}>
           <img
             src="https://icon-library.com/images/phone-icon-circle/phone-icon-circle-12.jpg"
             className="h-10 w-10 cursor-pointer hover:opacity-80"
           ></img>
         </a>
-        <span className="text-lg">087-500-6783</span>
+        <span className="text-lg">{sellerInfo.mobile}</span>
       </div>
     </div>
   );

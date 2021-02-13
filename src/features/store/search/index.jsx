@@ -55,9 +55,9 @@ function SearchProduct(props) {
       <p className="text-lg m-2 ">
         คำที่ค้นหา : <span className="text-yellow-600">{search}</span>
       </p>
-      <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 justify-items-center">
+      <br></br>
+      <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 grid-cols-2 justify-items-center">
         {listProduct.map((item) => (
-          <Link to="/p">
             <ProductItem
               key={item.productId}
               id={item.productId}
@@ -69,7 +69,6 @@ function SearchProduct(props) {
               promotionCode1={item.promotionCode1}
               promotionCode2={item.promotionCode2}
             ></ProductItem>
-          </Link>
         ))}
       </div>
     </>
