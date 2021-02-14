@@ -13,7 +13,7 @@ function ProductItemCart(props) {
         {props.productName}
       </span>
       <div className="text-center">
-        <span className="text-md mx-2">{props.productPrice}x{props.productQty} </span><span>{props.productPrice*props.productQty} บาท</span>
+        <span className="text-md mx-2">{parseFloat(props.productPrice).toFixed(2)} x {props.productQty} </span><span>{props.productPrice*props.productQty} บาท</span>
         <br></br>
         <br></br>
         <EditProductQty

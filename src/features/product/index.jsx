@@ -46,7 +46,7 @@ function Product(props) {
           <div className="rounded p-5 break-words">
             <p className="text-4xl">{productInfo.productName}</p>
             <p className="text-lg bg-gray-100 p-5 md:w-1/3 text-center text-yellow-700">
-              {productInfo.netPrice} บาท
+              {parseFloat(productInfo.netPrice).toFixed(2)} บาท
             </p>
             <p className="text-lg">
               <span className="pr-1">จำนวน</span>{" "}

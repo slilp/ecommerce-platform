@@ -86,8 +86,6 @@ const BuyHistory = lazy(()=> import('../../features/history'));
       routes.store,
       routes.product,
       routes.cart,
-      routes.address,
-      routes.checkout,
       // routes.history
     ],
     redirect:{
@@ -104,7 +102,9 @@ const BuyHistory = lazy(()=> import('../../features/history'));
       routes.cart,
       routes.address,
       routes.checkout,
-      routes.history
+      routes.history,
+      routes.address,
+      routes.checkout
     ],
     redirect:{
       ...routes.main 
