@@ -1,5 +1,6 @@
 import React from "react";
-import { InputNumber } from "antd";
+import DeleteProductCart from "../delete";
+import EditProductQty from "../edit";
 
 function ProductItemCart(props) {
   return (
@@ -15,12 +16,15 @@ function ProductItemCart(props) {
         <span className="text-md mx-2">{props.productPrice}x{props.productQty} </span><span>{props.productPrice*props.productQty} บาท</span>
         <br></br>
         <br></br>
-        <InputNumber min={1} max={100000} defaultValue={props.productQty} />
+        <EditProductQty
+        productQty={props.productQty}
+        productId={props.id}
+        ></EditProductQty>
         <br></br>
         <br></br>
-        <span className="text-red-400 cursor-pointer px-1">
-          <i class="fas fa-trash-alt px-1"></i> ลบ
-        </span>
+        <DeleteProductCart
+          productId={props.id}
+        ></DeleteProductCart>
       </div>
     </div>
   );

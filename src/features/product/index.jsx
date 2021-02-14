@@ -2,20 +2,17 @@ import React, { useState, useEffect } from "react";
 import ProductPicture from "./picture";
 import Seller from "./seller";
 import { getParam } from "../../axios";
-import { Select, Radio, InputNumber, Button } from "antd";
+import { InputNumber, Button } from "antd";
+import AddCartBtn from "../cart/add";
 import { useHistory } from "react-router-dom";
 
 function Product(props) {
   const [productInfo, setProductInfo] = useState({
-    sellerInfo:{},
-    productImage:[]
+    sellerInfo: {},
+    productImage: [],
   });
-  const [size, setSize] = React.useState("default");
+  const [qty, setQty] = useState(1);
   const history = useHistory();
-
-  const handleSizeChange = (e) => {
-    setSize(e.target.value);
-  };
 
   useEffect(async () => {
     const res = await getParam(`/product/info/${props.match.params.id}`, {});
@@ -27,6 +24,10 @@ function Product(props) {
       }
     }
   }, []);
+
+  const changeQty = (value) => {
+    setQty(value);
+  };
 
   return (
     <div className="container mx-auto my-5 min-h-screen">
@@ -47,28 +48,25 @@ function Product(props) {
             <p className="text-lg bg-gray-100 p-5 md:w-1/3 text-center text-yellow-700">
               {productInfo.netPrice} บาท
             </p>
-            <p className="text-lg">กรุณาเลือก {productInfo.sectionKey}</p>
-            <Radio.Group value={size} onChange={handleSizeChange}>
-              {/* {productInfo.sectionValue.map((item) => (
-                <Radio.Button value={item.value}>{item.display}</Radio.Button>
-              ))} */}
-            </Radio.Group>
-            <p></p>
             <p className="text-lg">
               <span className="pr-1">จำนวน</span>{" "}
-              <InputNumber min={1} max={100000} defaultValue={3} />{" "}
+              <InputNumber
+                min={1}
+                max={100}
+                defaultValue={1}
+                onChange={changeQty}
+              />
               <span className="pl-1 pr-1">ชิ้น</span>{" "}
             </p>
             <p className="text-lg">รายละเอียดสินค้า</p>
             <p className="text-base">{productInfo.productDesc}</p>
-            <Button
-              type="primary"
-              shape="round"
-              size={"large"}
-              style={{ paddingLeft: "5rem", paddingRight: "5rem" }}
-            >
-              ใส่ตะกร้า
-            </Button>
+            <AddCartBtn
+              id={productInfo.productId}
+              name={productInfo.productName}
+              qty={qty}
+              img={productInfo.imagePath}
+              price={productInfo.netPrice}
+            ></AddCartBtn>
           </div>
           <hr></hr>
           <br></br>

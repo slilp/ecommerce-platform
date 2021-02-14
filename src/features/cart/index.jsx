@@ -1,35 +1,11 @@
 import React from "react";
 import ProductItemCart from "./product";
 import Bill from "../bill";
-import Item from "antd/lib/list/Item";
+import { useSelector } from "react-redux";
 
-function Cart() {
-  const cartList = [
-    {
-      id: 1,
-      productName: "i-phone",
-      productImg:
-        "https://public-assets.skooldio.com/course-images%2F10391b9d-d19e-4107-ad82-cc686af37f7e%2FData%2520Storytelling%2520with%2520Infographics.jpg",
-      productQty: 20,
-      productPrice:500.00
-    },
-    {
-      id: 2,
-      productName: "i-phone",
-      productImg:
-        "https://public-assets.skooldio.com/course-images%2F10391b9d-d19e-4107-ad82-cc686af37f7e%2FData%2520Storytelling%2520with%2520Infographics.jpg",
-      productQty: 20,
-      productPrice:500.00
-    },
-    {
-      id: 3,
-      productName: "i-phone",
-      productImg:
-        "https://public-assets.skooldio.com/course-images%2F10391b9d-d19e-4107-ad82-cc686af37f7e%2FData%2520Storytelling%2520with%2520Infographics.jpg",
-      productQty: 20,
-      productPrice:500.00
-    },
-  ];
+function Cart(props) {
+
+  const cartList = useSelector((state) => state.cart);
 
   return (
     <div className="container mx-auto md:p-10 p-4 min-h-screen">
@@ -37,16 +13,21 @@ function Cart() {
       <div className="flex md:flex-row flex-col justify-between space-y-3">
         <div className="lg:w-2/3 md:w-1/2">
           <h1 className="text-xl border-b-2 border-red-500 p-2">
-            รายการของคุณ
+            รายการของคุณ  
           </h1>
+          {
+            cartList.length == 0 && (
+              <h1 className="text-center my-5">ยังไม่มีรายการ</h1>
+            )
+          }
           {cartList.map(item => (
             <ProductItemCart
-            key={item.id}
-            id={item.id}
+            key={item.productId}
+            id={item.productId}
             productName={item.productName}
-            productImg={item.productImg}
-            productQty={item.productQty}
-            productPrice={item.productPrice}
+            productImg={item.productImage || "https://img2.pngio.com/documentation-screenshotlayer-api-default-png-250_250.png"}
+            productQty={item.quantity}
+            productPrice={item.netPrice}
             ></ProductItemCart>
           ))}
         </div>
