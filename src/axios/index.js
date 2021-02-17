@@ -1,4 +1,12 @@
 import axios from "axios";
+import {
+    getAccessToken,
+    removeAccessToken
+} from "../storage/token";
+import {
+    removeCustomerInfo
+} from "../storage/info";
+
 const API_URL = "http://localhost:5000/api";
 
 async function postJson(url, req) {
@@ -10,8 +18,8 @@ async function postJson(url, req) {
         }
 
         const res = await axios.post(
-            API_URL + url , req ,{
-                headers : headers
+            API_URL + url, req, {
+                headers: headers
             }
         );
 
@@ -36,7 +44,65 @@ async function getParam(url, req) {
     }
 }
 
-export  {
+
+async function getParamAuth(url, req) {
+
+    try {
+
+        const headers = {
+            'Authorization': `Bearer ${getAccessToken()}`
+        }
+
+
+        const res = await axios.get(API_URL + url, {
+            params: req,
+            headers: headers
+        });
+    
+        return res;
+
+    } catch (error) {
+        
+        if(error.response?.status === 401){
+            removeAccessToken();
+            removeCustomerInfo();
+            window.location.reload();
+       }
+
+        return error.response;
+    }
+}
+
+async function postJsonAuth(url, req) {
+    try {
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getAccessToken()}`
+        }
+
+        const res = await axios.post(
+            API_URL + url, req, {
+                headers: headers
+            }
+        );
+        return res;
+
+    } catch (error) {
+
+        if(error.response?.status === 401){
+             removeAccessToken();
+             removeCustomerInfo();
+             window.location.reload();
+        }
+
+        return error.response;
+    }
+}
+
+export {
     postJson,
-    getParam
+    getParam,
+    getParamAuth,
+    postJsonAuth
 }

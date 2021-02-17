@@ -18,7 +18,7 @@ function ProductItem(props) {
             <p className="text-lg bold p-2 pb-0 break-words"> {props.name}</p>
           </div>
           <hr></hr>
-          <p className="p-2 text-xl text-green-900">{props.netPrice}</p>
+          <p className="p-2 text-xl text-green-900">{parseFloat(props.netPrice).toFixed(2)}</p>
         </div>
       </Link>
     </>
