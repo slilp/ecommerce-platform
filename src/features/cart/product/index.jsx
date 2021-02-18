@@ -9,7 +9,7 @@ function ProductItemCart(props) {
         className="md:w-1/2 w-4/5 mx-auto"
         src={props.productImg}
       ></img>
-      <span className="text-lg px-2">
+      <span className="text-md md:text-lg px-2">
         {props.productName}
       </span>
       <div className="text-center">

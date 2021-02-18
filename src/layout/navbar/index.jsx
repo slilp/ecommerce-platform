@@ -3,10 +3,12 @@ import cart from "../../common/icon/cart.svg";
 import { Link } from "react-router-dom";
 import { getAccessToken } from "../../storage/token";
 import { getCustomerInfo } from "../../storage/info";
+import { useSelector } from "react-redux";
 
 function NavBar(props) {
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState({ name: "", image: "" });
+  const cartList = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -48,7 +50,12 @@ function NavBar(props) {
             </div>
             <div className="flex space-x-7">
               <Link to="/cart">
-                <img src={cart} className="w-8 cursor-pointer"></img>
+                <div className="rounded-full bg-yellow-500 h-5 w-5 flex items-center justify-center mx-auto">
+                  <span className="absolute z-20 text-white text-md">
+                    {cartList.length}
+                  </span>
+                </div>
+                <img src={cart} className="w-8 cursor-pointer z-0"></img>
               </Link>
               {isLogin && (
                 <Link to="/">
@@ -84,6 +91,8 @@ function NavBar(props) {
 }
 
 function NavBarMobile({ isLogin, name }) {
+  const cartList = useSelector((state) => state.cart);
+
   return (
     <div className="sticky top-0 bg-white shadow p-3 w-full lg:hidden z-50 m-0">
       <div className="container mx-auto pl-3 pr-3 ">
@@ -99,13 +108,17 @@ function NavBarMobile({ isLogin, name }) {
           <div></div>
           <div className="flex space-x-5">
             <Link to="/cart">
-              <img src={cart} className="w-6 mt-2 cursor-pointer"></img>
+              <div className="rounded-full bg-yellow-500 h-5 w-5 flex items-center justify-center mx-auto">
+                <span className="absolute z-20 text-white text-md">
+                  {cartList.length}
+                </span>
+              </div>
+              <img src={cart} className="w-8 cursor-pointer z-0"></img>
             </Link>
             {isLogin && (
               <Link to="/login">
                 <button className="text-white text-base bg-pink-500 hover:bg-blue-600 shadow-md focus:outline-none p-2 rounded">
                   <i className="fas fa-users mx-1"></i>
-              
                 </button>
               </Link>
             )}

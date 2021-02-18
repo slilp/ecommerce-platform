@@ -1,72 +1,119 @@
-import React from "react";
-import { Table, Tag, Space } from "antd";
+import React, { useState, useEffect } from "react";
+import { Table, Tag } from "antd";
+import { getParamAuth } from "../../../axios";
+import { Radio } from "antd";
+
+const optionsStatus = [
+  { label: "รอการจัดส่ง", value: "ordering" , color : "volcano" },
+  { label: "ส่งสำเร็จ", value: "success" ,color : "success"},
+];
+
+const word = {
+  ordering: "รอการจัดส่ง",
+  success: "จัดส่งเเล้ว",
+};
+
+const reloadData = async (status, page, size) => {
+  const res = await getParamAuth(
+    `/order/search/${status}/${page}/${size}/`,
+    {}
+  );
+  if (res.status == 200) {
+    if (res.data.data.listOrder != null) {
+      let data = res.data.data.listOrder.map((item) => {
+        return {
+          key: item.orderId,
+          date: new Date(item.orderDate).toLocaleDateString("th-TH"),
+          product: item.orderCart
+            .map((i) => i.productInfo.productName)
+            .join(" / "),
+          status: item.orderStatus,
+        };
+      });
+
+      return { list: data, total: res.data.data.totalRecord };
+    } else {
+      return [];
+    }
+  }
+};
+
 function HistoryTable() {
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park ",
-      tags: ["cool", "teacher"],
-    },
-  ];
+  const [history, setHistory] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
+  const [status, setStatus] = useState("ordering");
+  const [pagination, setPagination] = useState();
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: (text) => <a>{text}</a>,
+      title: "วันที่",
+      dataIndex: "date",
+      key: "date",
+      render: (text) => <span>{text}</span>,
     },
     {
-      title: "Tags",
-      key: "tags",
-      dataIndex: "tags",
-      render: (tags) => (
-        <>
-          {tags.map((tag) => {
-            let color = tag.length > 5 ? "geekblue" : "green";
-            if (tag === "loser") {
-              color = "volcano";
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
+      title: "รายการสินค้า",
+      dataIndex: "product",
+      key: "product",
+      render: (text) => <span>{text}</span>,
     },
     {
-      title: "Action",
-      key: "action",
-      render: (text, record) => (
-        <Space size="middle">
-          <a >
-            Invite {record.name} Lorem ipsum dolor sit, amet consectetur
-          </a>
-          <a>Delete</a>
-        </Space>
+      title: "สถานะ",
+      dataIndex: "status",
+      key: "status",
+      render: (text) => (
+        <Tag color={optionsStatus.find(v=>v.value==status).color} key={text}>
+          {word[text]}
+        </Tag>
       ),
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  useEffect(async () => {
+    const res = await reloadData(status, 0, 10);
+    setHistory(res.list);
+    setPagination({
+      total: res.total,
+      current: 1,
+    });
+  }, [status]);
+
+  const handleTableChange = async (pagination, filters, sorter) => {
+    const res = await reloadData(
+      status,
+      pagination.current - 1,
+      pagination.pageSize
+    );
+    setHistory(res.list);
+    setPagination({
+      ...pagination,
+      current: pagination.current,
+    });
+  };
+
+  const onChangeChannel = async (e) => {
+    setStatus(e.target.value);
+  };
+
+  return (
+    <div>
+      <Radio.Group
+        options={optionsStatus}
+        onChange={onChangeChannel}
+        value={status}
+        optionType="button"
+        buttonStyle="solid"
+      />
+      <br></br>
+      <br></br>
+      <Table
+        columns={columns}
+        dataSource={history}
+        pagination={pagination}
+        onChange={handleTableChange}
+      />
+    </div>
+  );
 }
 
 export default HistoryTable;
