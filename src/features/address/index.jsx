@@ -49,10 +49,12 @@ function Address() {
           <br></br>
           <hr></hr>
           <br></br>
-          {(openAddForm && addressInfo == null) && (
+          {(addressInfo == null) && (
             <div className="text-center text-lg cursor-pointer">
               <span onClick={openAddForm}>
-                <i class="fas fa-plus-square text-2xl px-2"></i>
+                {!openBtn && (<i class="fas fa-plus-square text-2xl px-2"></i>)}
+                {openBtn && (<i class="fas fa-minus-square text-2xl px-2"></i>)}
+
                 เพิ่มที่อยู่จัดส่ง
               </span>
             </div>

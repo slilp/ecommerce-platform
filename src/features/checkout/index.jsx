@@ -1,4 +1,6 @@
-import React from "react";
+import React , { useState , useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import PaymentChannel from "./paymentChannel";
 import kplus from "../../common/icon/kplus.png";
 import scb from "../../common/icon/scb.jpg";
@@ -8,28 +10,48 @@ import trueWallet from "../../common/icon/true.png";
 import Bill from "../bill";
 
 function Checkout() {
-  const paymentChannel = [
+
+  const history = useHistory();
+  const cartList = useSelector((state) => state.cart);
+
+  const [paymentChannel,setPaymentChannel] = useState([
     {
+      id:1,
       name: "K-Plus",
       icon: kplus,
+      select: true
     },
     {
+      id:2,
       name: "SCB",
       icon: scb,
+      select: false
     },
     {
+      id:3,
       name: "Credit/Debit",
       icon: credit,
+      select: false
     },
     {
+      id:4,
       name: "True Wallet",
       icon: trueWallet,
+      select: false
     },
     {
+      id:5,
       name: "(300.00)",
       icon: coin,
+      select: false
     },
-  ];
+  ]);
+
+  useEffect(async () => {
+    if(cartList.length == 0){
+      history.push("/cart");
+    }
+  }, []);
 
   return (
     <div className="container mx-auto md:p-10 p-4 min-h-screen">
@@ -43,8 +65,13 @@ function Checkout() {
           <div className="grid grid-cols-2 lg:grid-cols-3 p-2">
             {paymentChannel.map((item) => (
               <PaymentChannel
+                key={item.id}
+                id={item.id}
                 name={item.name}
                 icon={item.icon}
+                select={item.select}
+                channels={paymentChannel}
+                setSelect={setPaymentChannel}
               ></PaymentChannel>
             ))}
           </div>
@@ -55,6 +82,7 @@ function Checkout() {
           <Bill 
           step="checkout"
           next="/history"
+          paymentChannel={paymentChannel.find(item=>item.select).id}
           ></Bill>
         </div>
       </div>

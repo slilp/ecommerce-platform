@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
             case "DELETE_CART":
                 const index = state.findIndex(item => item.productId == action.payload.productId);
                 if (index > -1) {
-                  state.splice(index, 1);
+                    state.splice(index, 1);
                 }
                 return [
                     ...state
@@ -40,7 +40,8 @@ const reducer = (state = initialState, action) => {
                         }
                     }
                 });
-
+            case "DELETE_ALL_CART":
+                return [];
             default:
                 return state
     }

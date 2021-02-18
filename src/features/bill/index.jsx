@@ -1,14 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { postJsonAuth } from "../../axios";
+import { message } from "antd";
 
 function Bill(props) {
   const cartList = useSelector((state) => state.cart);
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [pay, setPay] = useState(false);
 
   const word = {
     checkout: "ชำระเงิน",
     address: "ต่อไป",
     cart: "ต่อไป",
+  };
+
+  const paymentNext = async () => {
+    if (props.step == "checkout") {
+      if (props.paymentChannel === 5) {
+        setPay(true);
+        const res = await postJsonAuth("/order/create", {
+          orderDate: Date.now(),
+          items: cartList.map((item) => {
+            return {
+              productId: item.productId,
+              quantity: item.quantity,
+            };
+          }),
+        });
+        if (res.status == 200) {
+          dispatch({
+            type: "DELETE_ALL_CART",
+          });
+          history.push(props.next);
+        } else {
+          message.error("เกิดข้อผิดพลาดกรุณาลองดูใหม่", 3);
+        }
+      } else {
+        message.error("ช่องทางการชำระเงินนี้ยังไม่เปิดใช้งาน", 3);
+      }
+    } else {
+      history.push(props.next);
+    }
   };
 
   return (
@@ -50,13 +85,28 @@ function Bill(props) {
       </p>
       <br></br>
       {cartList.length != 0 && (
-        <Link to={props.next}>
-          <button className="text-white text-lg bg-green-400 hover:bg-green-600 border-0 focus:border-0 cursor-pointer  py-2 w-full rounded">
-            <i className="fas fa-money-bill mr-2"></i>
-            {word[props.step]}
-          </button>
-        </Link>
+        <button
+          onClick={paymentNext}
+          className="text-white text-lg bg-green-400 hover:bg-green-600 border-0 focus:border-0 cursor-pointer  py-2 w-full rounded"
+        >
+          <i className="fas fa-money-bill mr-2"></i>
+          {word[props.step]}
+        </button>
       )}
+      {pay && <Payment></Payment>}
+    </div>
+  );
+}
+
+function Payment() {
+  return (
+    <div className="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
+      <span
+        className="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0"
+        style={{ top: "50%" }}
+      >
+        <i className="fas fa-circle-notch fa-spin fa-5x"></i>
+      </span>
     </div>
   );
 }

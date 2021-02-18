@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Select } from "antd";
+import { Form, Input, Button, Select , message } from "antd";
+import { postJsonAuth } from "../../../axios";
 const { Option } = Select;
 const provinceData = ["Zhejiang", "Jiangsu"];
 const cityData = {
@@ -29,12 +30,30 @@ const AddAddress = () => {
     setFormLayout(layout);
   };
 
+  const onFinish = async (values) => {
+
+    const res = await postJsonAuth("/address/create",{
+      addressName : "บ้าน",
+      addressInfo : "99/89 ซอย สิทธิชัย",
+      isDefault : true,
+      addressId : 1
+    });
+    if (res.status == 200) {
+
+      window.location.reload();
+      
+    } else {
+        message.error("เกิดข้อผิดพลาดกรุณาลองดูใหม่", 3);
+    }
+  };
+
   return (
     <>
       <Form
         layout={formLayout}
         form={form}
         layout="vertical"
+        onFinish={onFinish}
         initialValues={{
           layout: formLayout,
         }}
@@ -71,7 +90,9 @@ const AddAddress = () => {
           <Input placeholder="input placeholder" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary">Submit</Button>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </>

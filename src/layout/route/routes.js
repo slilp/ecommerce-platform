@@ -12,6 +12,7 @@ const Cart = lazy(()=> import('../../features/cart'));
 const Address = lazy(()=> import('../../features/address'));
 const Checkout = lazy(()=> import('../../features/checkout'));
 const BuyHistory = lazy(()=> import('../../features/history'));
+const Payment = lazy(()=> import('../../features/payment'));
 
   const routes = {
     login: {
@@ -73,6 +74,12 @@ const BuyHistory = lazy(()=> import('../../features/history'));
       exact: '/history',
       name: 'history',
       component: BuyHistory
+    },
+    payment:{
+      path: '/payment',
+      exact: '/payment',
+      name: 'payment',
+      component: Payment
     }
   };
   
@@ -104,7 +111,8 @@ const BuyHistory = lazy(()=> import('../../features/history'));
       routes.checkout,
       routes.history,
       routes.address,
-      routes.checkout
+      routes.checkout,
+      routes.payment
     ],
     redirect:{
       ...routes.main 
