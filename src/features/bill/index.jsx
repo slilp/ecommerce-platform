@@ -27,6 +27,7 @@ function Bill(props) {
             return {
               productId: item.productId,
               quantity: item.quantity,
+              price: item.netPrice
             };
           }),
         });

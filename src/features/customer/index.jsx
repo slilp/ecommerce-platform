@@ -1,28 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import {getParamAuth} from "../../axios";
 
-function CUstomerInfoCard() {
-  const customer = {
-    profile:
-      "https://images.pexels.com/photos/61100/pexels-photo-61100.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb",
-    title: "นาย",
-    firstName: "สลิล",
-    lastName: "พ่วงพุ่ม",
-    tel: "tel:+0875006783",
-    facebook: "https://tailwindcss.com/docs/box-shadow",
-    line: "https://tailwindcss.com/docs/box-shadow",
-  };
+function CustomerInfoCard() {
+  const [profile, setProfile] = useState({});
+
+  useEffect(async () => {
+    const res = await getParamAuth("/customer/info", {});
+    if (res.status == 200) {
+      if (res.data.data != null) {
+        setProfile(res.data.data);
+      } 
+    }
+  }, []);
 
   return (
     <div class="card border relative flex flex-col shadow-lg m-5">
       <img
         class="max-h-20 w-full opacity-80 absolute"
-        src="https://unsplash.com/photos/h0Vxgz5tyXA/download?force=true&w=640"
-        alt=""
+        src="https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg?size=626&ext=jpg"
+
       />
       <div class="profile w-full flex m-3 ml-4 text-white">
         <img
           class="w-28 h-28 mx-auto bg-white rounded-full z-40"
-          src={customer.profile}
+          src={profile.profileImagePath}
           alt=""
         />
         <div className="title mt-11 ml-3 font-bold flex flex-col">
@@ -32,22 +33,22 @@ function CUstomerInfoCard() {
       </div>
       <div className=" text-md text-center">
         <p className="font-bold text-lg">
-          {customer.title} {customer.firstName} {customer.lastName}
+          {profile.title} {profile.firstName} {profile.lastName}
         </p>
         <div className="flex justify-center my-5">
-          <a href={customer.line} target="_blank">
+          <a href={profile.line} target="_blank">
             <img
               src="https://image.flaticon.com/icons/png/128/2111/2111498.png"
               className="h-10 w-10  mx-2 cursor-pointer hover:opacity-80"
             ></img>
           </a>
-          <a href={customer.facebook} target="_blank">
+          <a href={profile.facebook} target="_blank">
             <img
               src="https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512"
               className="h-10 w-10  mx-2 cursor-pointer hover:opacity-80"
             ></img>
           </a>
-          <a href={customer.tel}>
+          <a href={profile.mobile}>
             <img
               src="https://icon-library.com/images/phone-icon-circle/phone-icon-circle-12.jpg"
               className="h-10 w-10 mx-2 cursor-pointer hover:opacity-80"
@@ -59,4 +60,4 @@ function CUstomerInfoCard() {
   );
 }
 
-export default CUstomerInfoCard;
+export default CustomerInfoCard;

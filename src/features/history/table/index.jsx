@@ -24,12 +24,15 @@ const reloadData = async (status, page, size) => {
         return {
           key: item.orderId,
           date: new Date(item.orderDate).toLocaleDateString("th-TH"),
+          price:  parseFloat(item.orderCart.map(f=>f.price).reduce((acc,num)=>acc+num)).toFixed(2)  ,
           product: item.orderCart
             .map((i) => i.productInfo.productName)
             .join(" / "),
-          status: item.orderStatus,
+          // status: item.orderStatus,
         };
       });
+
+      console.log(data);
 
       return { list: data, total: res.data.data.totalRecord };
     } else {
@@ -40,7 +43,6 @@ const reloadData = async (status, page, size) => {
 
 function HistoryTable() {
   const [history, setHistory] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
   const [status, setStatus] = useState("ordering");
   const [pagination, setPagination] = useState();
 
@@ -58,15 +60,21 @@ function HistoryTable() {
       render: (text) => <span>{text}</span>,
     },
     {
-      title: "สถานะ",
-      dataIndex: "status",
-      key: "status",
-      render: (text) => (
-        <Tag color={optionsStatus.find(v=>v.value==status).color} key={text}>
-          {word[text]}
-        </Tag>
-      ),
-    },
+      title: "รวม (บาท)",
+      dataIndex: "price",
+      key: "price",
+      render: (text) => <span>{text}</span>,
+    }
+    // {
+    //   title: "สถานะ",
+    //   dataIndex: "status",
+    //   key: "status",
+    //   render: (text) => (
+    //     <Tag color={optionsStatus.find(v=>v.value==status).color} key={text}>
+    //       {word[text]}
+    //     </Tag>
+    //   ),
+    // },
   ];
 
   useEffect(async () => {
