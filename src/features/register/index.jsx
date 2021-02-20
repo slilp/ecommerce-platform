@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, Button, message } from "antd";
+import {Link} from "react-router-dom";
 import "./style.scss";
 import SocialButton from "../../common/components/social-btn";
 import { postJson } from "../../axios";
@@ -44,7 +45,7 @@ function Register(props) {
         <div>
           <h1 className="lg:text-3xl text-2xl ">สมัครสมาชิก</h1>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center" >
           <div className="lg:w-1/3 w-4/5">
             <Form.Item>สมัครสมาชิกง่ายๆด้วย</Form.Item>
 
@@ -147,6 +148,9 @@ function Register(props) {
                   สมัครสมาชิก
                 </Button>
               </Form.Item>
+              
+              <p className="text-lg">มีบัญชีเเล้ว ? <Link to="/login">เข้าสู่ระบบ</Link></p>
+
             </Form>
           </div>
         </div>

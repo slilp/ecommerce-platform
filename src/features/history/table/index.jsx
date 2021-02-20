@@ -81,7 +81,7 @@ function HistoryTable() {
     const res = await reloadData(status, 0, 10);
     setHistory(res.list);
     setPagination({
-      total: res.total,
+      total: res.total-1,
       current: 1,
     });
   }, [status]);

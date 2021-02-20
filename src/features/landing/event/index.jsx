@@ -1,52 +1,30 @@
-import React from "react";
+import React , {useState,useEffect} from "react";
 import { Link } from "react-router-dom";
-import Carousel, { consts } from "react-elastic-carousel";
+import { getParam } from "../../../axios";
 
 function Event() {
-  const suggestContent = [
-    {
-      image:
-        "https://positioningmag.com/wp-content/uploads/2020/03/bookfair.jpg",
-      order: 1,
-      url: "/store",
-    },
-    {
-      image: "https://mpics.mgronline.com/pics/Images/563000006967601.JPEG",
-      order: 0,
-      url: "/store",
-    },
-    {
-      image: "https://mpics.mgronline.com/pics/Images/563000006967601.JPEG",
-      order: 0,
-      url: "/store",
-    },
-    {
-      image: "https://mpics.mgronline.com/pics/Images/563000006967601.JPEG",
-      order: 0,
-      url: "/store",
-    },
-    {
-      image: "https://mpics.mgronline.com/pics/Images/563000006967601.JPEG",
-      order: 0,
-      url: "/store",
-    },
-  ];
+  
+  const [mainContent,setMainContent] = useState({});
+  const [suggestContent,setSuggestContent] =  useState([{}]);
 
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 2 },
-    { width: 768, itemsToShow: 3 },
-    { width: 1200, itemsToShow: 4 },
-  ];
+  useEffect(async () => {
 
-  const myArrow = ({ type, onClick, isEdge }) => {
-    const pointer = type === consts.PREV ? "👈" : "👉";
-    return (
-      <button onClick={onClick} disabled={isEdge}>
-        {pointer}
-      </button>
-    );
-  };
+    const resSubmain = await getParam(`/advertisement/search/sub_main`, {});
+    if (resSubmain.status == 200) {
+      if (resSubmain.data.data != null) {
+        setSuggestContent(resSubmain.data.data.listData);
+      } 
+    }
+
+    const resMain = await getParam(`/advertisement/search/main`, {});
+    if (resMain.status == 200) {
+      if (resMain.data.data != null) {
+        setMainContent(resMain.data.data.listData[0]);
+      } 
+    }
+
+  }, []);
+
 
   return (
     <div className="container mx-auto mt-6 px-5">
@@ -60,27 +38,22 @@ function Event() {
       <div className="flex flex-col lg:flex-row space-y-2  lg:space-x-2 lg:space-y-0 mt-2">
         <div className="flex-1 lg:h-96 h-68">
           <div className="h-full">
-            {suggestContent
-              .filter((o) => o.order == 1)
-              .map((item) => (
-                <Link to={item.url}>
+                <Link to={mainContent.clickUrl}>
                   <img
                     className="w-full h-full  cursor-pointer hover:opacity-75"
-                    src={item.image}
+                    src={mainContent.imageUrl}
                   ></img>
                 </Link>
-              ))}
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 flex-1 lg:h-96 h-70 mt-1">
           {suggestContent
-            .filter((o) => o.order != 1)
             .map((item) => (
-              <Link to={item.url}>
+              <Link to={item.clickUrl}>
                 <div className="h-48">
                   <img
                     className="h-full w-full px-1 py-1 hover:opacity-75 cursor-pointer "
-                    src={item.image}
+                    src={item.imageUrl}
                   ></img>
                 </div>
               </Link>
@@ -88,7 +61,7 @@ function Event() {
         </div>
       </div>
       <br></br>
-      <br></br>
+      {/* <br></br>
       <span className="text-2xl">Marketplace มาใหม่</span>
       <Link
         to="/marketplace"
@@ -141,7 +114,7 @@ function Event() {
             src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
           ></img>
         </div>
-      </Carousel>
+      </Carousel> */}
     </div>
   );
 }
