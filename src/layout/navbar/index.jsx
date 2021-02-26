@@ -11,6 +11,7 @@ function NavBar(props) {
   const [isLogin, setIsLogin] = useState(false);
   const [info, setInfo] = useState({ name: "", image: "" });
   const cartList = useSelector((state) => state.cart);
+  const pageShortCut = useSelector((state) => state.page);
 
   useEffect(() => {
     if (getAccessToken()) {
@@ -49,6 +50,12 @@ function NavBar(props) {
                 >
                   Market
                 </Link>
+                <Link
+                  to={pageShortCut.page}
+                  className="text-indigo-900 px-3 py-2 text-lg  hover:text-indigo-400"
+                >
+                  {pageShortCut.label}
+                </Link>
               </div>
             </div>
             <div className="flex space-x-7">
@@ -86,7 +93,9 @@ function NavBar(props) {
       <NavBarMobile 
       name={info.name}
       cartList={cartList}
-      isLogin={isLogin}>
+      isLogin={isLogin}
+      shortCut={pageShortCut}
+      >
       </NavBarMobile>
     </>
   );

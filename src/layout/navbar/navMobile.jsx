@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import cart from "../../common/icon/cart.svg";
 import DropDownNavMenu from "./dropdown";
 
-function NavBarMobile({ name , cartList , isLogin}) {
+function NavBarMobile({ name , cartList , isLogin , shortCut}) {
     
     return (
       <div className="sticky top-0 bg-white shadow p-3 w-full lg:hidden z-50 m-0">
@@ -15,6 +15,12 @@ function NavBarMobile({ name , cartList , isLogin}) {
               <Link to="/marketplace" className="text-blue-900  py-2 text-base">
                 Market
               </Link>
+              {/* <Link
+                  to={shortCut.page}
+                  className="text-indigo-900 px-3 py-2 text-lg  hover:text-indigo-400"
+                >
+                  {shortCut.label}
+                </Link> */}
             </div>
             <div></div>
             <div className="flex space-x-5">

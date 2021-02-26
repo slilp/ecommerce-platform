@@ -5,6 +5,7 @@ import { getParam } from "../../axios";
 import { InputNumber, Button } from "antd";
 import AddCartBtn from "../cart/add";
 import { useHistory } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function Product(props) {
   const [productInfo, setProductInfo] = useState({
@@ -32,6 +33,9 @@ function Product(props) {
   return (
     <div className="container mx-auto my-5 min-h-screen">
       <div className="flex flex-col lg:flex-row justify-center">
+          <span className="pl-5 text-base cursor-pointer" onClick={()=>history.goBack()}>
+            <i className="fas fa-arrow-left px-1"></i> กลับ
+          </span>
         <div className="flex-1 p-3">
           <div className="flex flex-col md:w-3/4 w-full mx-auto">
             <div className="grid grid-cols-2">
@@ -59,7 +63,9 @@ function Product(props) {
               <span className="pl-1 pr-1">ชิ้น</span>{" "}
             </p>
             <p className="text-lg">รายละเอียดสินค้า</p>
-            <p className="text-base whitespace-pre-line">{productInfo.productDesc}</p>
+            <p className="text-base whitespace-pre-line">
+              {productInfo.productDesc}
+            </p>
             <AddCartBtn
               id={productInfo.productId}
               name={productInfo.productName}

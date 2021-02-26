@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import SearchProduct from "./search";
 import { getParam } from "../../axios";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function Store(props) {
   const [search, setSearch] = useState({});
@@ -11,9 +12,10 @@ function Store(props) {
   });
 
   const history = useHistory();
-
+  const dispatch = useDispatch();
 
   useEffect(async () => {
+
     const res = await getParam(
       "/marketplace/info/" + props.match.params.id,
       {}
@@ -21,6 +23,15 @@ function Store(props) {
 
     if (res.status == 200) {
       if(res.data.data != null){
+
+        dispatch({
+          type: "ADD_SHORTCUT_PAGE",
+          payload: {
+            page: `/store/${props.match.params.id}`,
+            label: res.data.data.marketName
+          }
+        });
+
         setMarket(res.data.data);
       }else{
         history.push("/marketplace");
