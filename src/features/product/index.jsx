@@ -59,7 +59,7 @@ function Product(props) {
               <span className="pl-1 pr-1">ชิ้น</span>{" "}
             </p>
             <p className="text-lg">รายละเอียดสินค้า</p>
-            <p className="text-base">{productInfo.productDesc}</p>
+            <p className="text-base whitespace-pre-line">{productInfo.productDesc}</p>
             <AddCartBtn
               id={productInfo.productId}
               name={productInfo.productName}
