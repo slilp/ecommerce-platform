@@ -42,7 +42,7 @@ function Address() {
               {/* <p className="font-bold">{addressInfo.address.}</p> */}
               <p>นาย สลิล พ่วงพุ่ม</p>
               <p>
-                {addressInfo.addressInfo} เเขวง {addressInfo.address.subDistrict} เขต {addressInfo.address.district} {addressInfo.address.province} {addressInfo.address.zipCode}
+                {addressInfo.addressInfo}  {addressInfo.zipCode} 
               </p>
             </div>
           )}
@@ -66,9 +66,12 @@ function Address() {
             </div>
           )}
         </div>
-        <div className="lg:w-1/3 md:w-1/2 px-2">
-          <Bill step="address" next="/checkout"></Bill>
-        </div>
+        {!(addressInfo == null) && (
+              <div className="lg:w-1/3 md:w-1/2 px-2">
+                 <Bill step="address" next="/checkout"></Bill>
+              </div>
+          )}
+
       </div>
     </div>
   );

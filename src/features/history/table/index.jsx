@@ -83,6 +83,8 @@ function HistoryTable() {
     setPagination({
       total: res.total-1,
       current: 1,
+      indentSize:10,
+      showSizeChanger:false
     });
   }, [status]);
 
@@ -95,7 +97,7 @@ function HistoryTable() {
     setHistory(res.list);
     setPagination({
       ...pagination,
-      current: pagination.current,
+      current: pagination.current
     });
   };
 

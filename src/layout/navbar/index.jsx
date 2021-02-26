@@ -26,15 +26,16 @@ function NavBar(props) {
       <div className="lg:fixed lg:block bg-white  pt-4 lg:p-4 lg:shadow w-full z-50 hidden">
         <div className="container mx-auto pl-3 pr-3 ">
           <div className="hidden  lg:flex flex-wrap justify-between items-center ">
-            <div className="flex space-x-5 align-middle">
-              <div className="flex space-x-5 align-middle">
+            <div className="flex space-x-5">
+              <div className="flex space-x-5">
                 <Link to="/">
-                  <img
+                  <p className="text-black text-2xl pt-1 mb-0">MarketKub</p>
+                  {/* <img
                     src={
                       "https://www.tact.in.th/wp-content/uploads/2019/07/Tact_logo_2019-13-04-1.png"
                     }
                     className="w-24"
-                  ></img>
+                  ></img> */}
                 </Link>
                 <Link
                   to="/"
@@ -72,16 +73,16 @@ function NavBar(props) {
               )}
             </div>
           </div>
-          <div className="flex flex-wrap justify-center items-center mb-3 lg:hidden">
+        </div>
+      </div>
+      {/* <div className="flex flex-wrap justify-center items-center mb-3 lg:hidden mt-1">
             <img
               src={
                 "https://www.tact.in.th/wp-content/uploads/2019/07/Tact_logo_2019-13-04-1.png"
               }
               className="w-24"
             ></img>
-          </div>
-        </div>
-      </div>
+      </div> */}
       <NavBarMobile 
       name={info.name}
       cartList={cartList}

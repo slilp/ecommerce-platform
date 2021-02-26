@@ -9,15 +9,15 @@ function Footer(props) {
           <i className="fa fa-phone-alt px-2 py-2"></i>087-500-6783
         </a>
         <a className="text-white hover:text-gray-300" href="https://www.w3schools.com" target="_blank">
-          <i className="fab fa-facebook px-2 py-2"></i>MyEcom
+          <i className="fab fa-facebook px-2 py-2"></i>MarketKub
         </a>
         <a className="text-white hover:text-gray-300" href="https://www.w3schools.com" target="_blank">
-          <i className="fab fa-line px-2 py-2"></i>MyEcom
+          <i className="fab fa-line px-2 py-2"></i>MarketKub
         </a>
       </div>
       <br></br>
       <p className="text-sm text-white">
-        @2021 blink ecommerce All right reserved
+        @2021 MarketKub All right reserved
       </p>
     </div>
   );
