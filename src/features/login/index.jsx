@@ -1,8 +1,8 @@
 import React , {useEffect} from "react";
 import { Form, Input, Button, message } from "antd";
 import SocialButton from "../../common/components/social-btn";
-import { postJson } from "../../axios";
-import { setAccessToken } from "../../storage/token";
+import { postJson , getParamAuth} from "../../axios";
+import { setAccessToken , removeAccessToken } from "../../storage/token";
 import { setCustomerInfo } from "../../storage/info";
 import { Link } from "react-router-dom";
 import "./style.scss";
@@ -10,14 +10,23 @@ import "./style.scss";
 function Login(props) {
   const [form] = Form.useForm();
 
-  useEffect(() => {
+  useEffect(async () => {
     let params = new URLSearchParams(props.location.search);
     let token = params.get("t");
     if (token) {
-        setAccessToken(token);
-        setCustomerInfo("slil puangpoom");
-        window.location.reload();
+      setAccessToken(token);
+      const res = await getParamAuth("/customer/info", {});
+      if (res.status == 200) {
+        if (res.data.data != null) {
+          setCustomerInfo(`${res.data.data.firstName ? res.data.data.firstName : ''} ${res.data.data.lastName? res.data.data.lastName : '' }`);
+          window.location.reload();
+        }else{
+          message.error("เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่", 3);
+        }
+      }else{
+        removeAccessToken();
         message.error("เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่", 3);
+      }
     }
   }, [])
 
@@ -30,7 +39,7 @@ function Login(props) {
     if (res.status == 200) {
       //set login info
       setAccessToken(res.data.data.accessToken);
-      setCustomerInfo("slil puangpoom");
+      setCustomerInfo(`${res.data.data.customerInfo.firstName} ${res.data.data.customerInfo.lastName}`);
       window.location.reload();
     } else {
       message.error("อีเมลล์ หรือ รหัสผ่าน ไม่ถูกต้อง", 3);
