@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import { Form, Input, Button, message } from "antd";
 import SocialButton from "../../common/components/social-btn";
 import { postJson } from "../../axios";
@@ -9,6 +9,17 @@ import "./style.scss";
 
 function Login(props) {
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    let params = new URLSearchParams(props.location.search);
+    let token = params.get("t");
+    if (token) {
+        setAccessToken(token);
+        setCustomerInfo("slil puangpoom");
+        window.location.reload();
+        message.error("เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่", 3);
+    }
+  }, [])
 
   const onFinish = async (values) => {
     const res = await postJson("/customer/login", {
@@ -88,6 +99,7 @@ function Login(props) {
                 <SocialButton
                   channel="facebook"
                   label="เข้าสู่ระบบด้วย facebook"
+                  url="http://localhost:5000/api/customer/facebook"
                 ></SocialButton>
               </Form.Item>
             </Form>

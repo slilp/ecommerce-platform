@@ -41,7 +41,7 @@ function Checkout() {
     },
     {
       id:5,
-      name: "(300.00)",
+      name: "Other",
       icon: coin,
       select: false
     },

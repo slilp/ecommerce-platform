@@ -61,60 +61,6 @@ function Event() {
         </div>
       </div>
       <br></br>
-      {/* <br></br>
-      <span className="text-2xl">Marketplace มาใหม่</span>
-      <Link
-        to="/marketplace"
-        className="text-xl float-right cursor-pointer text-indigo-900 hover:text-indigo-400"
-      >
-        ดูทั้งหมด
-      </Link>
-      <br></br> <br></br>
-      <Carousel breakPoints={breakPoints} renderArrow={myArrow}>
-        <div className="div">
-          <img
-            className="hover:opacity-75 cursor-pointer"
-            src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
-          ></img>
-        </div>
-        <div className="div">
-          <img
-            className="hover:opacity-75 cursor-pointer ml-4"
-            src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
-          ></img>
-        </div>
-        <div className="div">
-          <img
-            className="hover:opacity-75 cursor-pointer ml-4"
-            src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
-          ></img>
-        </div>
-        <div className="div">
-          {" "}
-          <img
-            className="hover:opacity-75 cursor-pointer ml-4"
-            src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
-          ></img>
-        </div>
-        <div className="div">
-          <img
-            className="hover:opacity-75 cursor-pointer ml-4"
-            src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
-          ></img>
-        </div>
-        <div className="div">
-          <img
-            className="hover:opacity-75 cursor-pointer ml-4"
-            src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
-          ></img>
-        </div>
-        <div className="div">
-          <img
-            className="hover:opacity-75 cursor-pointer ml-4"
-            src="https://mpics.mgronline.com/pics/Images/563000006967601.JPEG"
-          ></img>
-        </div>
-      </Carousel> */}
     </div>
   );
 }
