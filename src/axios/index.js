@@ -7,7 +7,7 @@ import {
     removeCustomerInfo
 } from "../storage/info";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL =   process.env.SERVICE_URL ||  "http://localhost:5051/api";
 
 async function postJson(url, req) {
     try {

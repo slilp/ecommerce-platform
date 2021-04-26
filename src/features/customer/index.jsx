@@ -23,7 +23,8 @@ function CustomerInfoCard() {
       <div class="profile w-full flex m-3 ml-4 text-white">
         <img
           class="w-28 h-28 mx-auto bg-white rounded-full z-40"
-          src={profile.profileImagePath}
+          src={profile.profileImagePath ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDYLLQm52fRCLlUXdlb4_C728SDu_2qobCKw&usqp=CAU"}
           alt=""
         />
         <div className="title mt-11 ml-3 font-bold flex flex-col">

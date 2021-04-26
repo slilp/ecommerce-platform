@@ -43,7 +43,8 @@ function Store(props) {
   http: return (
     <div>
       <div className="container mx-auto lg:p-5  lg:w-2/3">
-        <img className="lg:h-90 w-full" src={market.backgroundImagePath || ""}></img>
+        <img className="lg:h-90 w-full" src={market.backgroundImagePath ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDYLLQm52fRCLlUXdlb4_C728SDu_2qobCKw&usqp=CAU"}></img>
 
         <div className="flex justify-center lg:flex-row flex-col items-center p-5">
           <div className="p-5 lg:flex-1">

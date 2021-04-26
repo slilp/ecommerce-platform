@@ -108,7 +108,7 @@ function Login(props) {
                 <SocialButton
                   channel="facebook"
                   label="เข้าสู่ระบบด้วย facebook"
-                  url="http://localhost:5000/api/customer/facebook"
+                  url={"http://localhost:5000/api/customer/facebook"}
                 ></SocialButton>
               </Form.Item>
             </Form>
